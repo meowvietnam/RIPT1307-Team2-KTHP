@@ -1,0 +1,127 @@
+[
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
+    "Method": "GetRoom",
+    "RelativePath": "admin/rooms",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
+    "Method": "CreateRoom",
+    "RelativePath": "admin/rooms",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "room",
+        "Type": "RIPT1307_BTL.Common.Room",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "GetRoomService",
+    "RelativePath": "admin/roomservices",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "CreateRoomService",
+    "RelativePath": "admin/roomservices",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomService",
+        "Type": "RIPT1307_BTL.Common.RoomService",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
+    "Method": "GetUsers",
+    "RelativePath": "admin/users",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
+    "Method": "CreateUser",
+    "RelativePath": "admin/users",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "user",
+        "Type": "User",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "GetRoomService",
+    "RelativePath": "staffController/roomservices",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "CreateRoomService",
+    "RelativePath": "staffController/roomservices",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "roomService",
+        "Type": "RIPT1307_BTL.Common.RoomService",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.WeatherForecastController",
+    "Method": "Get",
+    "RelativePath": "WeatherForecast",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[RIPT1307_BTL.WeatherForecast, RIPT1307-BTL, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ],
+    "EndpointName": "GetWeatherForecast"
+  }
+]

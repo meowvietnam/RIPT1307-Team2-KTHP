@@ -1,0 +1,6 @@
+@RIPT1307_BTL_HostAddress = http://localhost:5223
+
+GET {{RIPT1307_BTL_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

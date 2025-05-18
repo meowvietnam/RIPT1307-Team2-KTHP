@@ -10,7 +10,7 @@ namespace RIPT1307_BTL.Common
         public string RoomName { get; set; }         // RoomName VARCHAR(50) NOT NULL
         public string RoomType { get; set; }         // RoomType ENUM('Single', 'Double') NOT NULL
         public decimal Price { get; set; }            // Price DECIMAL(10,2) NOT NULL
-        public string Status { get; set; }            // Status ENUM('Available', 'In Use', 'Under Maintenance', 'Reserved') DEFAULT 'Available'
+        public string Status { get; set; }            // Status ENUM('Available', 'In Use','Being Cleaned', 'Under Maintenance', 'Reserved') DEFAULT 'Available'
         public string? Description { get; set; }     // Description TEXT (có thể null)
     }
 }

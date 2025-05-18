@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\common\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:common\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\controllers\\staffcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -19,20 +19,16 @@
       "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:common\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\common\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:common\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\ript1307-btl.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:ript1307-btl.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D2BDBB62-C46F-42DF-B769-1021734FDEF7}|RIPT1307-BTL.csproj|d:\\github\\ript1307-team2-kthp\\backend\\ript1307-btl\\common\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -68,9 +64,10 @@
               "RelativeDocumentMoniker": "Controllers\\StaffController.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Controllers\\StaffController.cs",
               "RelativeToolTip": "Controllers\\StaffController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAuwBIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAkwFoAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T09:20:47.493Z"
+              "WhenOpened": "2025-05-15T09:20:47.493Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -80,9 +77,10 @@
               "RelativeDocumentMoniker": "Common\\RoomService.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Common\\RoomService.cs",
               "RelativeToolTip": "Common\\RoomService.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAYAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAYAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T09:13:39.122Z"
+              "WhenOpened": "2025-05-15T09:13:39.122Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -92,86 +90,79 @@
               "RelativeDocumentMoniker": "Common\\Room.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Common\\Room.cs",
               "RelativeToolTip": "Common\\Room.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T09:11:34.431Z"
+              "WhenOpened": "2025-05-15T09:11:34.431Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 0,
               "Title": "Service.cs",
               "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Common\\Service.cs",
               "RelativeDocumentMoniker": "Common\\Service.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Common\\Service.cs",
               "RelativeToolTip": "Common\\Service.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T09:06:56.984Z"
+              "WhenOpened": "2025-05-15T09:06:56.984Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "RIPT1307-BTL.csproj",
-              "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\RIPT1307-BTL.csproj",
-              "RelativeDocumentMoniker": "RIPT1307-BTL.csproj",
-              "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\RIPT1307-BTL.csproj",
-              "RelativeToolTip": "RIPT1307-BTL.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABYAAAANAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-05-15T08:53:13.804Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAASwB8AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-05-15T08:33:32.674Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "AdminController.cs",
               "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Controllers\\AdminController.cs",
               "RelativeToolTip": "Controllers\\AdminController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAYwK4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T08:32:53.044Z"
+              "WhenOpened": "2025-05-15T08:32:53.044Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\AppDbContext.cs",
               "RelativeDocumentMoniker": "AppDbContext.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\AppDbContext.cs",
               "RelativeToolTip": "AppDbContext.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwAwAAAAgAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T08:27:08.913Z"
+              "WhenOpened": "2025-05-15T08:27:08.913Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Common\\User.cs",
               "RelativeDocumentMoniker": "Common\\User.cs",
               "ToolTip": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Common\\User.cs",
               "RelativeToolTip": "Common\\User.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-05-15T08:16:21.719Z"
+              "WhenOpened": "2025-05-15T08:16:21.719Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\appsettings.json",
               "RelativeDocumentMoniker": "appsettings.json",
@@ -183,7 +174,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "WeatherForecastController.cs",
               "DocumentMoniker": "D:\\GitHub\\RIPT1307-Team2-KTHP\\Backend\\RIPT1307-BTL\\Controllers\\WeatherForecastController.cs",
               "RelativeDocumentMoniker": "Controllers\\WeatherForecastController.cs",

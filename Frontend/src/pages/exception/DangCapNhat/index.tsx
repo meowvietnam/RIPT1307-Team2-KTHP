@@ -28,7 +28,6 @@ const DangCapNhatPage = () => {
 				extra={<a href={landingUrl}>Tới trang Cổng thông tin</a>}
 			/>
 
-			<Footer />
 		</div>
 	);
 };

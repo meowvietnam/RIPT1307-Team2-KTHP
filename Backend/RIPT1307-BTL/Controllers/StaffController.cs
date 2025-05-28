@@ -33,7 +33,7 @@ namespace RIPT1307_BTL.Controllers
         {
             // Tìm dịch vụ đã tồn tại trong phòng (nếu có)
             var existing = _context.RoomServices
-                .FirstOrDefault(rs => rs.RoomID == input.RoomID && rs.ServiceID == input.ServiceID && !rs.IsCheckOut);
+                .FirstOrDefault(rs => rs.RoomID == input.RoomID && rs.ServiceID == input.ServiceID );
 
             if (existing != null)
             {
@@ -44,7 +44,7 @@ namespace RIPT1307_BTL.Controllers
             {
                 // Nếu chưa có thì thêm mới
                 input.Quantity = input.Quantity > 0 ? input.Quantity : 1;
-                input.IsCheckOut = false;
+                //input.IsCheckOut = false;
                 _context.RoomServices.Add(input);
             }
 
@@ -55,7 +55,7 @@ namespace RIPT1307_BTL.Controllers
         public IActionResult DeleteRoomService(int roomId, int serviceId)
         {
             var roomService = _context.RoomServices
-                .FirstOrDefault(rs => rs.RoomID == roomId && rs.ServiceID == serviceId && !rs.IsCheckOut);
+                .FirstOrDefault(rs => rs.RoomID == roomId && rs.ServiceID == serviceId);
 
             if (roomService == null)
             {

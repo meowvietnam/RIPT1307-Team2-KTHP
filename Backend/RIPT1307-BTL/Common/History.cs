@@ -16,6 +16,10 @@ namespace RIPT1307_BTL.Common
         public List<RoomService> RoomServices { get; set; }
 
         public float TotalPrice { get; set; }
+        public bool IsCheckOut { get; set; }
+        public int NumberPhoneCustomer { get; set; }             
+        public int NameCustomer { get; set; }                   
+        public int IDCustomer { get; set; }                   
 
         public DateTime StartTime { get; set; }
         public DateTime? EndTime { get; set; }

@@ -12,6 +12,7 @@ namespace RIPT1307_BTL.Common
         public decimal Price { get; set; }            // Price DECIMAL(10,2) NOT NULL
         public string Status { get; set; }            // Status ENUM('Available', 'In Use','Being Cleaned', 'Under Maintenance', 'Reserved') DEFAULT 'Available'
         public string? Description { get; set; }     // Description TEXT (có thể null)
+        public int RoomTypeID { get; set; }              // Foreign key
 
         public List<RoomService> RoomServices { get; set; }
 

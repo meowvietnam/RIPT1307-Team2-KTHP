@@ -15,7 +15,6 @@ namespace RIPT1307_BTL.Common
         public Service Service { get; set; }
 
         public int Quantity { get; set; } = 1;
-        public bool IsCheckOut { get; set; }
 
         public int? HistoryID { get; set; }                 // Khóa ngoại đến History
         public History History { get; set; }                // Navigation đến History

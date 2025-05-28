@@ -18,17 +18,62 @@
 
 	///////////////////////////////////
 	// DEFAULT MENU
-	{
-		path: '/dashboard',
-		name: 'Dashboard',
-		component: './TrangChu',
-		icon: 'HomeOutlined',
-	},
+	// {
+	// 	path: '/dashboard',
+	// 	name: 'Dashboard',
+	// 	component: './TrangChu',
+	// 	icon: 'HomeOutlined',
+	// },
 	
+	// {
+	// 	path: '/gioi-thieu',
+	// 	name: 'About',
+	// 	component: './TienIch/GioiThieu',
+	// },
 	{
-		path: '/gioi-thieu',
-		name: 'About',
-		component: './TienIch/GioiThieu',
+		name: 'Quản lý khách sạn',
+		path: '/quan-ly-khach-san',
+		icon: 'HomeOutlined',
+		routes: [
+			{
+				path: '/quan-ly-khach-san/danh-sach-phong',
+				name: 'Danh sách phòng khách sạn',
+				component: './rooms/index',
+				icon: 'HomeOutlined',
+			},
+			{
+				path: '/quan-ly-khach-san/quan-ly-phong',
+				name: 'Quản lý phòng khách sạn',
+				component: './rooms/ManageRoom',
+				icon: 'HomeOutlined',
+			},
+			{
+				path: '/quan-ly-khach-san/quan-ly-tai-khoan',
+				name: 'Quản lý tài khoản',
+				component: './ManageUsers/index',
+				icon: 'HomeOutlined',
+			},
+			{
+				path: '/quan-ly-khach-san/dich-vu-phong',
+				name: 'Dịch vụ phòng',
+				component: './RoomService/index',
+				icon: 'HomeOutlined',
+			},
+			{
+				path: '/quan-ly-khach-san/danh-sach-dich-vu',
+				name: 'Danh sách dịch vụ',
+				component: './Service/index',
+				icon: 'HomeOutlined',
+			},
+		],
+	},
+
+	{
+		path: '/danh-sach-phong',
+		name: 'Danh sách phòng',
+		component: './rooms/index',
+		icon: 'HomeOutlined',
+		hideInMenu: true,
 	},
 	
 	// DANH MUC HE THONG

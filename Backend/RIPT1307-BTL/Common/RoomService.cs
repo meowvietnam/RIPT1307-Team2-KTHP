@@ -6,18 +6,18 @@ namespace RIPT1307_BTL.Common
 
     public class RoomService
     {
-        public int ID { get; set; }                 // ID INT AUTO_INCREMENT PRIMARY KEY
+        public int RoomServiceID { get; set; }
 
-        public int RoomID { get; set; }             // RoomID INT NOT NULL
-        public Room Room { get; set; }               // Navigation property
+        public int RoomID { get; set; }          // Foreign key
+        public Room Room { get; set; }           // Navigation property
 
-        public int ServiceID { get; set; }          // ServiceID INT NOT NULL
-        public Service Service { get; set; }         // Navigation property
+        public int ServiceID { get; set; }
+        public Service Service { get; set; }
 
-        public int Quantity { get; set; } = 1;      // Quantity INT DEFAULT 1
+        public int Quantity { get; set; } = 1;
+        public bool IsCheckOut { get; set; }
 
-        public DateTime StartTime { get; set; }     // StartTime DATETIME NOT NULL
-
-        public DateTime? EndTime { get; set; }      // EndTime DATETIME NULL (nullable)
+        public int? HistoryID { get; set; }                 // Khóa ngoại đến History
+        public History History { get; set; }                // Navigation đến History
     }
 }

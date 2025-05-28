@@ -61,13 +61,7 @@ namespace RIPT1307_BTL.Controllers
                                 //  You could also return Ok(new { message = "User deleted" }); if you prefer.
         }
 
-        [HttpGet("rooms")]
-        public IActionResult GetRoom()
-        {
-            var room = _context.Rooms.ToList();
-            return Ok(room);
-        }
-
+  
         [HttpPost("rooms")]
         public IActionResult CreateRoom([FromBody] Room room)
         {

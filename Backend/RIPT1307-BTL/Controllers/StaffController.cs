@@ -18,97 +18,53 @@ namespace RIPT1307_BTL.Controllers
 
 
         // RoomService Endpoints
-        [HttpGet("roomservices")]
-        public IActionResult GetRoomServices()
+        [HttpGet("rooms")]
+        public IActionResult GetAllRooms()
         {
-            // Eager loading to include related Room and Service data
-            var roomServices = _context.RoomServices
-                .Include(rs => rs.Room)
-                .Include(rs => rs.Service)
+            var rooms = _context.Rooms
+                .Include(r => r.RoomServices)
+                    .ThenInclude(rs => rs.Service)
                 .ToList();
-            return Ok(roomServices);
-        }
 
-        [HttpGet("roomservices/{id}", Name = "GetRoomServiceById")]
-        public IActionResult GetRoomServiceById(int id)
+            return Ok(rooms);
+        }
+        [HttpPost("roomservices/update")]
+        public IActionResult AddOrUpdateRoomService([FromBody] RoomService input)
+        {
+            // Tìm dịch vụ đã tồn tại trong phòng (nếu có)
+            var existing = _context.RoomServices
+                .FirstOrDefault(rs => rs.RoomID == input.RoomID && rs.ServiceID == input.ServiceID && !rs.IsCheckOut);
+
+            if (existing != null)
+            {
+                // Nếu đã tồn tại dịch vụ đó trong phòng, tăng số lượng
+                existing.Quantity += input.Quantity > 0 ? input.Quantity : 1;
+            }
+            else
+            {
+                // Nếu chưa có thì thêm mới
+                input.Quantity = input.Quantity > 0 ? input.Quantity : 1;
+                input.IsCheckOut = false;
+                _context.RoomServices.Add(input);
+            }
+
+            _context.SaveChanges();
+            return Ok("Service updated successfully.");
+        }
+        [HttpDelete("roomservices")]
+        public IActionResult DeleteRoomService(int roomId, int serviceId)
         {
             var roomService = _context.RoomServices
-                .Include(rs => rs.Room)
-                .Include(rs => rs.Service)
-                .FirstOrDefault(rs => rs.ID == id);
+                .FirstOrDefault(rs => rs.RoomID == roomId && rs.ServiceID == serviceId && !rs.IsCheckOut);
 
             if (roomService == null)
             {
-                return NotFound($"RoomService with ID {id} not found");
+                return NotFound("Dịch vụ không tồn tại trong phòng hoặc đã được checkout.");
             }
 
-            return Ok(roomService);
-        }
-
-
-        [HttpPost("roomservices")]
-        public IActionResult CreateRoomService([FromBody] RoomService roomService)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            // Kiểm tra xem RoomID và ServiceID có tồn tại không
-            var roomExists = _context.Rooms.Any(r => r.RoomID == roomService.RoomID);
-            var serviceExists = _context.Services.Any(s => s.ServiceID == roomService.ServiceID);
-
-            if (!roomExists || !serviceExists)
-            {
-                return BadRequest("Invalid RoomID or ServiceID.");
-            }
-            _context.RoomServices.Add(roomService);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(GetRoomServiceById), new { id = roomService.ID }, roomService);
-        }
-
-        [HttpPut("roomservices/{id}")]
-        public IActionResult UpdateRoomService(int id, [FromBody] RoomService updatedRoomService)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-            var roomService = _context.RoomServices.FirstOrDefault(rs => rs.ID == id);
-            if (roomService == null)
-            {
-                return NotFound($"RoomService with ID {id} not found.");
-            }
-
-            // Kiểm tra xem RoomID và ServiceID có tồn tại không
-            var roomExists = _context.Rooms.Any(r => r.RoomID == updatedRoomService.RoomID);
-            var serviceExists = _context.Services.Any(s => s.ServiceID == updatedRoomService.ServiceID);
-            if (!roomExists || !serviceExists)
-            {
-                return BadRequest("Invalid RoomID or ServiceID.");
-            }
-
-            roomService.RoomID = updatedRoomService.RoomID;
-            roomService.ServiceID = updatedRoomService.ServiceID;
-            roomService.Quantity = updatedRoomService.Quantity;
-            roomService.StartTime = updatedRoomService.StartTime;
-            roomService.EndTime = updatedRoomService.EndTime;
-
-            _context.SaveChanges();
-            return Ok(roomService);
-        }
-
-        [HttpDelete("roomservices/{id}")]
-        public IActionResult DeleteRoomService(int id)
-        {
-            var roomService = _context.RoomServices.FirstOrDefault(rs => rs.ID == id);
-            if (roomService == null)
-            {
-                return NotFound($"RoomService with ID {id} not found.");
-            }
             _context.RoomServices.Remove(roomService);
             _context.SaveChanges();
-            return NoContent();
+            return Ok("Đã xóa dịch vụ khỏi phòng.");
         }
     }
 }

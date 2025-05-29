@@ -1,11 +1,21 @@
 export interface Room {
   roomid: number;
   roomname: string;
-  roomtype: string;
+  baseroomtype: 'Phòng đơn' | 'Phòng đôi';
   price: number;
   status: 'Đang trống' | 'Đã cho thuê' | 'Đang dọn dẹp';
   description?: string;
   RoomServices?: RoomService[];
+  RoomTypeID: number;  
+  RoomType?: RoomType; 
+}
+
+export interface RoomType {
+  RoomTypeID: number;
+  TypeName: 'Theo giờ' | 'Theo ngày' | 'Qua đêm';
+  HourThreshold: number;
+  OverchargePerHour: number;
+  Rooms?: Room[];
 }
 
 export type RoomService = {
@@ -16,12 +26,11 @@ export type RoomService = {
   Service: Service;
   Quanity: number;
   StartTime: string;
-  IsCheckedOut: boolean;
   EndTime?: string;
   History?: History;
 };
 
-export type ServiceType = 'Food' | 'Drink' | 'Room_Hourly' | 'Room_Overnight';
+export type ServiceType = 'Food' | 'Drink';
 
 export interface Service {
   ServiceID: number;
@@ -31,6 +40,9 @@ export interface Service {
 }
 
 export interface History {
+  PhoneCustomer: string;
+  FullNameCustomer: string;
+  IDCustomer: string;
   historyid: number;
   roomid: number;
   room: Room;
@@ -38,8 +50,9 @@ export interface History {
   user?: User;
   roomservices: RoomService[];
   totalprice: number;
-  starttime: string;   // ISO format (DateTime)
+  starttime: string | null;
   endtime?: string | null;
+  isCheckedOut?: boolean;
 }
 
 export interface User{

@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RIPT1307-BTL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7e8c0a8b910e9e8adc735da1d18168e117f0f42")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+436921d4a9bdd011b04d827b6f9442c89cf64da1")]
 [assembly: System.Reflection.AssemblyProductAttribute("RIPT1307-BTL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RIPT1307-BTL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

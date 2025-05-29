@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Select, Row, Col, Space } from 'antd';
-import RoomCard from '@/components/RoomCard/RoomCard';
+import RoomCard from '@/pages/ManageRoom/components/RoomCard';
+import { Room } from '@/services/typing';
 
 const { Search } = Input;
 const { Option } = Select;
-
-interface Room {
-  roomid: string;
-  roomname: string;
-  roomtype: string;
-  price: number;
-  status: 'Đang trống' | 'Đã cho thuê' | 'Đang dọn dẹp';
-  description?: string;
-}
 
 const STORAGE_KEY = 'hotel_rooms';
 
@@ -27,10 +19,10 @@ const RoomStaffView: React.FC = () => {
 
   const filteredRooms = rooms.filter(room =>
     (!filterStatus || room.status === filterStatus) &&
-    (room.roomid.includes(searchText) || room.roomname.includes(searchText))
+    (room.roomid.toString().includes(searchText) || room.roomname.includes(searchText))
   );
 
-  const handleStatusChange = (roomid: string, newStatus: Room['status']) => {
+  const handleStatusChange = (roomid: number, newStatus: Room['status']) => {
   const updated = rooms.map(r => r.roomid === roomid ? { ...r, status: newStatus } : r);
   setRooms(updated);
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));

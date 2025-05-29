@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Table, Button, Modal, Popconfirm, message } from 'antd';
-import UserForm from '@/components/UserForm';
+import UserForm from '@/pages/ManageUsers/components/UserForm';
+import type { User } from '@/services/typing';
 
 const STORAGE_KEY = 'USER_DATA';
 
 export default function UserManagerPage() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -14,7 +15,7 @@ export default function UserManagerPage() {
     if (data) setUsers(JSON.parse(data));
   }, []);
 
-  const saveToStorage = (data: any[]) => {
+  const saveToStorage = (data: User[]) => {
     setUsers(data);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   };
@@ -64,6 +65,7 @@ export default function UserManagerPage() {
 
   return (
     <>
+      <h2>Quản lý nhân viên</h2>
       <Button type="primary" onClick={handleAdd} style={{ marginBottom: 16 }}>
         Thêm tài khoản
       </Button>

@@ -1,4 +1,6 @@
-﻿export default [
+﻿import path from "path";
+
+export default [
 	{
 		path: '/user',
 		layout: false,
@@ -39,41 +41,35 @@
 				path: '/quan-ly-khach-san/danh-sach-phong',
 				name: 'Danh sách phòng khách sạn',
 				component: './rooms/index',
-				icon: 'HomeOutlined',
+				icon: 'AppstoreOutlined',
 			},
 			{
 				path: '/quan-ly-khach-san/quan-ly-phong',
 				name: 'Quản lý phòng khách sạn',
-				component: './rooms/ManageRoom',
-				icon: 'HomeOutlined',
+				component: './ManageRoom/ManageRoom',
+				icon: 'SettingOutlined',
 			},
 			{
-				path: '/quan-ly-khach-san/quan-ly-tai-khoan',
-				name: 'Quản lý tài khoản',
-				component: './ManageUsers/index',
-				icon: 'HomeOutlined',
-			},
-			{
-				path: '/quan-ly-khach-san/dich-vu-phong',
-				name: 'Dịch vụ phòng',
-				component: './RoomService/index',
-				icon: 'HomeOutlined',
-			},
-			{
-				path: '/quan-ly-khach-san/danh-sach-dich-vu',
-				name: 'Danh sách dịch vụ',
-				component: './Service/index',
-				icon: 'HomeOutlined',
-			},
+				path: '/quan-ly-khach-san/quan-ly-kieu-phong',
+				name: 'Quản lý kiểu phòng',
+				component: './ManageRoomType/index',
+				icon: 'ApartmentOutlined',
+			}
 		],
 	},
 
 	{
-		path: '/danh-sach-phong',
-		name: 'Danh sách phòng',
-		component: './rooms/index',
-		icon: 'HomeOutlined',
-		hideInMenu: true,
+		path: '/quan-ly-nhan-vien',
+		name: 'Quản lý nhân viên',
+		component: './ManageUsers/index',
+		icon: 'UserOutlined',
+	},
+
+	{
+		path: '/danh-sach-dich-vu',
+		name: 'Danh sách dịch vụ',
+		component: './Service/index',
+		icon: 'GiftOutlined',
 	},
 	
 	// DANH MUC HE THONG

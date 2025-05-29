@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Descriptions, Modal, Select, message } from 'antd';
+import { Button, Card, Descriptions, Modal, Select, message } from 'antd';
 import './RoomCard.less';
-import type { Room, Service, History } from '@/models/Type';
+import type { Room, Service, History } from '@/services/typing';
 import RoomHistoryModal from './RoomCardModal';
 
 const { Option } = Select;
@@ -51,20 +51,36 @@ const RoomCard: React.FC<Props> = ({ room, onStatusChange}) => {
     <>
       <div onClick={showModal}>
         <Card className={cardClass} title={`${room.roomname}`}>
-          <p><b>Loại:</b> {room.roomtype}</p>
-          <p><b>Giá:</b> {room.price.toLocaleString()}₫/Buổi</p>
+          <p><b>Loại:</b> {room.baseroomtype}</p>
+          <p>
+            <b>Loại phòng: </b>
+            {room.RoomType?.TypeName || room.RoomTypeID || 'Chưa xác định'} ({room.RoomType?.HourThreshold} giờ)
+          </p>
+          <p><b>Note: </b>{room.RoomType?.OverchargePerHour.toLocaleString()}đ/giờ nếu quá giờ</p>
+          <p><b>Giá:</b> {room.price.toLocaleString()}₫</p>
           <p>
             <b>Trạng thái:</b>{' '}
-            <Select
-              value={room.status}
-              onChange={handleStatusChange}
-              style={{ width: 160 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <Option value="Đang trống">Đang trống</Option>
-              <Option value="Đã cho thuê">Đã cho thuê</Option>
-              <Option value="Đang dọn dẹp">Đang dọn dẹp</Option>
-            </Select>
+            <span>
+              {room.status}
+              {room.status === 'Đang dọn dẹp' && (
+                <Button
+                  type="primary"
+                  size="small"
+                  style={{
+                    marginLeft: 8,
+                    background: '#52c41a',
+                    border: 'none',
+                  }}
+                  onClick={e => {
+                    e.stopPropagation();
+                    onStatusChange(room.roomid, 'Đang trống');
+                    message.success(`Phòng ${room.roomid} đã chuyển sang "Đang trống"!`);
+                  }}
+                >
+                  Đã dọn dẹp
+                </Button>
+              )}
+            </span>
           </p>
           {room.description && <p><b>Mô tả:</b> {room.description}</p>}
         </Card>
@@ -73,6 +89,7 @@ const RoomCard: React.FC<Props> = ({ room, onStatusChange}) => {
         room={room}
         visible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
+        onStatusChange={onStatusChange}
       />
 
     </>

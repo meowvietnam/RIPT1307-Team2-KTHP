@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Table, Button, Space, Modal, message } from 'antd';
-import type { Service } from '@/models/Type';
-import ServiceForm from '@/components/ServiceForm';
+import type { Service } from '@/services/typing';
+import ServiceForm from '@/pages/Service/component/ServiceForm';
 
 const STORAGE_KEY = 'hotel_services';
 
@@ -13,7 +13,7 @@ const ServicePage = () => {
   useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY);
     if (stored) setServices(JSON.parse(stored));
-  }, []);
+  }, [open]);
 
   const saveToStorage = (data: Service[]) => {
     setServices(data);

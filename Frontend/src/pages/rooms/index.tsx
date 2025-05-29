@@ -1,9 +1,41 @@
 // src/pages/rooms/index.tsx
 import React, { useEffect, useState } from 'react';
 import { Button, Table, Popconfirm, message, Input, Select, Space } from 'antd';
-import * as roomService from '@/services/rooms';
-import RoomForm from '@/components/RoomForm';
-import { Room } from '@/models/Type';
+import RoomForm from '@/pages/rooms/components/RoomForm';
+import { Room } from '@/services/typing';
+
+const STORAGE_KEY = 'hotel_rooms';
+
+// ==== Các hàm xử lý phòng (từ services/rooms.ts) ====
+function getRooms(): Room[] {
+  const data = localStorage.getItem(STORAGE_KEY);
+  if (!data) return [];
+  try {
+    return JSON.parse(data);
+  } catch {
+    return [];
+  }
+}
+
+function saveRooms(rooms: Room[]) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(rooms));
+}
+
+function addRoom(room: Room) {
+  const rooms = getRooms();
+  rooms.push(room);
+  saveRooms(rooms);
+}
+
+function updateRoom(updatedRoom: Room) {
+  const rooms = getRooms().map(room => (room.roomid === updatedRoom.roomid ? updatedRoom : room));
+  saveRooms(rooms);
+}
+
+function deleteRoom(roomid: number) {
+  const rooms = getRooms().filter(room => room.roomid !== roomid);
+  saveRooms(rooms);
+}
 
 const { Option } = Select;
 
@@ -17,7 +49,7 @@ const RoomManagement: React.FC = () => {
 
   const fetchRooms = () => {
     setLoading(true);
-    const data = roomService.getRooms();
+    const data = getRooms();
     setRooms(data);
     setLoading(false);
   };
@@ -37,7 +69,7 @@ const RoomManagement: React.FC = () => {
   };
 
   const handleDelete = (roomid: number) => {
-    roomService.deleteRoom(roomid);
+    deleteRoom(roomid);
     message.success('Xóa phòng thành công');
     fetchRooms();
   };
@@ -49,10 +81,10 @@ const RoomManagement: React.FC = () => {
       return;
     }
     if (editingRoom) {
-      roomService.updateRoom(room);
+      updateRoom(room);
       message.success('Cập nhật phòng thành công');
     } else {
-      roomService.addRoom(room);
+      addRoom(room);
       message.success('Thêm phòng thành công');
     }
     setFormVisible(false);
@@ -70,8 +102,27 @@ const RoomManagement: React.FC = () => {
   const columns = [
     { title: 'Mã phòng', dataIndex: 'roomid', key: 'roomid' },
     { title: 'Tên phòng', dataIndex: 'roomname', key: 'roomname' },
-    { title: 'Loại phòng', dataIndex: 'roomtype', key: 'roomtype' },
-    { title: 'Giá', dataIndex: 'price', key: 'price', render: (price: number) => price.toLocaleString() + '₫/Buổi' },
+    {
+      title: 'Kiểu phòng',
+      dataIndex: 'baseroomtype',
+      key: 'baseroomtype',
+      render: (type: string) => type,
+    },
+    {
+      title: 'Loại phòng',
+      dataIndex: 'RoomType',
+      key: 'RoomType',
+      render: (_: any, record: Room) =>
+        record.RoomType?.TypeName ||
+        record.RoomTypeID ||
+        '',
+    },
+    {
+      title: 'Giá',
+      dataIndex: 'price',
+      key: 'price',
+      render: (price: number) => price.toLocaleString() + '₫/Buổi',
+    },
     { title: 'Trạng thái', dataIndex: 'status', key: 'status' },
     { title: 'Mô tả', dataIndex: 'description', key: 'description' },
     {
@@ -114,19 +165,19 @@ const RoomManagement: React.FC = () => {
         </Space>
 
         <Table
-        columns={columns}
-        dataSource={filteredRooms}
-        rowKey="roomid"
-        loading={loading}
-        pagination={{ pageSize: 5 }}
-        />
+          columns={columns}
+          dataSource={filteredRooms}
+          rowKey="roomid"
+          loading={loading}
+          pagination={{ pageSize: 5 }}
+          />
 
         <RoomForm
-        visible={formVisible}
-        onCancel={() => setFormVisible(false)}
-        onSubmit={handleSubmit}
-        initialValues={editingRoom || undefined}
-        />
+          visible={formVisible}
+          onCancel={() => setFormVisible(false)}
+          onSubmit={handleSubmit}
+          initialValues={editingRoom || undefined}
+          />
     </div>
   );
 };

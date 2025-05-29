@@ -3,8 +3,7 @@ import {
   Modal, Input, DatePicker, Button, Form, message, Select, InputNumber, Space
 } from 'antd';
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
-import type { Room, History, RoomService, Service, User } from '@/models/Type';
-import dayjs from 'dayjs';
+import type { Room, History, RoomService, Service, User } from '@/services/typing';
 
 interface Props {
   visible: boolean;
@@ -18,16 +17,15 @@ const CreateHistoryModal: React.FC<Props> = ({ visible, onClose, room, onCreated
   const [services, setServices] = useState<Service[]>([]);
   const [users, setUsers] = useState<User[]>([]);
 
-useEffect(() => {
-  const allUsers = JSON.parse(localStorage.getItem('hotel_users') || '[]') as User[];
-  setUsers(allUsers);
-}, []);
-
+  useEffect(() => {
+    const allUsers = JSON.parse(localStorage.getItem('USER_DATA') || '[]') as User[];
+    setUsers(allUsers);
+  }, [visible]);
 
   useEffect(() => {
     const all = JSON.parse(localStorage.getItem('hotel_services') || '[]') as Service[];
     setServices(all);
-  }, []);
+  }, [visible]);
 
   const handleSubmit = () => {
     form.validateFields().then((values) => {
@@ -40,12 +38,12 @@ useEffect(() => {
           ServiceID: item.serviceId,
           Service: service!,
           Quanity: item.quantity,
-          StartTime: item.startTime.toISOString(),
+          StartTime: item.startTime ? item.startTime.toISOString() : '',
           IsCheckedOut: false,
         };
       });
 
-      const total = newRoomServices.reduce((sum, rs) => {
+      const total = room.price + newRoomServices.reduce((sum, rs) => {
         return sum + (rs.Service?.Price || 0) * rs.Quanity;
       }, 0);
 
@@ -54,9 +52,14 @@ useEffect(() => {
         roomid: room.roomid,
         room,
         userid: Number(values.userid),
+        user: users.find(u => u.UserID === Number(values.userid)),
         roomservices: newRoomServices,
         totalprice: total,
-        starttime: values.starttime.toISOString(),
+        starttime: values.starttime ? values.starttime.toISOString() : null,
+        endtime: null,
+        PhoneCustomer: values.PhoneCustomer || '',
+        FullNameCustomer: values.FullNameCustomer || '',
+        IDCustomer: values.IDCustomer || '',
       };
 
       const all = JSON.parse(localStorage.getItem('hotel_histories') || '[]') as History[];
@@ -82,21 +85,38 @@ useEffect(() => {
     >
       <Form layout="vertical" form={form}>
         <Form.Item
-          label="User ID"
-          name="userid"
-          rules={[{ required: true, message: 'Vui lòng nhập User ID' }]}
+          label="Tên khách hàng"
+          name="FullNameCustomer"
         >
-          <Input type="number" placeholder="Nhập ID người dùng" />
+          <Input placeholder="Nhập tên khách hàng" />
         </Form.Item>
-
         <Form.Item
-          label="Thời gian bắt đầu"
-          name="starttime"
-          rules={[{ required: true, message: 'Vui lòng chọn thời gian' }]}
+          label="Số điện thoại khách"
+          name="PhoneCustomer"
         >
-          <DatePicker showTime style={{ width: '100%' }} />
+          <Input placeholder="Nhập số điện thoại khách" />
         </Form.Item>
-
+        <Form.Item
+          label="CMND/CCCD khách"
+          name="IDCustomer"
+        >
+          <Input placeholder="Nhập số CMND/CCCD khách" />
+        </Form.Item>
+        <Form.Item
+          label="User"
+          name="userid"
+          rules={[{ required: true, message: 'Vui lòng chọn nhân viên' }]}
+        >
+          <Select
+            placeholder="Chọn nhân viên"
+          >
+            {users.map(user => (
+              <Select.Option key={user.UserID} value={user.UserID}>
+                {user.FullName} ({user.Username})
+              </Select.Option>
+            ))}
+          </Select>
+        </Form.Item>
         <Form.List name="roomservices">
           {(fields, { add, remove }) => (
             <>
@@ -116,7 +136,6 @@ useEffect(() => {
                       ))}
                     </Select>
                   </Form.Item>
-
                   <Form.Item
                     {...restField}
                     name={[name, 'quantity']}
@@ -124,7 +143,6 @@ useEffect(() => {
                   >
                     <InputNumber min={1} placeholder="Số lượng" />
                   </Form.Item>
-
                   <Form.Item
                     {...restField}
                     name={[name, 'startTime']}
@@ -132,7 +150,6 @@ useEffect(() => {
                   >
                     <DatePicker showTime placeholder="Thời gian bắt đầu" />
                   </Form.Item>
-
                   <MinusCircleOutlined onClick={() => remove(name)} />
                 </Space>
               ))}

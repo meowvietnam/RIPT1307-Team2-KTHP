@@ -1,6 +1,6 @@
 import { Form, Input, InputNumber, Modal, Select } from 'antd';
 import { useEffect } from 'react';
-import type { Service } from '@/models/Type';
+import type { Service } from '@/services/typing';
 
 interface Props {
   visible: boolean;
@@ -42,8 +42,6 @@ const ServiceForm = ({ visible, data, onClose, onSave }: Props) => {
             <Select>
                 <Select.Option value="Food">Food</Select.Option>
                 <Select.Option value="Drink">Drink</Select.Option>
-                <Select.Option value="Room_Hourly">Room Hourly</Select.Option>
-                <Select.Option value="Room_Overnight">Room Overnight</Select.Option>
             </Select>
         </Form.Item>
       </Form>

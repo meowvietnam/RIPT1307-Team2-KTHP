@@ -35,6 +35,6 @@
 		".stylelintrc.js",
 		".prettierrc.js",
 		"mock/*"
-	],
+, "vite-env.d.ts"	],
 	"exclude": ["node_modules", "build", "dist", "scripts", "src/.umi/*", "webpack", "jest"]
 }

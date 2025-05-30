@@ -217,3 +217,11 @@ D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\obj\Debug\net8.0\RIPT1307-BTL
 D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\obj\Debug\net8.0\RIPT1307-BTL.genruntimeconfig.cache
 D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\obj\Debug\net8.0\ref\RIPT1307-BTL.dll
 D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\GitHub\RIPT1307-Team2-KTHP\Backend\RIPT1307-BTL\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

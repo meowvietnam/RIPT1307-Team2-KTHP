@@ -1,4 +1,5 @@
 import { useState } from 'react';
+// Extend ImportMeta interface for Vite env variables
 
 export default () => {
 	const [startLine, setStartLine] = useState<number>(0);

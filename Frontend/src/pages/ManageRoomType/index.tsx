@@ -2,107 +2,182 @@ import React, { useEffect, useState } from 'react';
 import { Table, Button, Modal, Form, InputNumber, Select, Space, message } from 'antd';
 import type { RoomType } from '@/services/typing';
 import RoomTypeForm from './components/RoomTypeForm';
-
-const STORAGE_KEY = 'hotel_roomtypes';
+import { API_BASE_URL } from '@/config/api';
 
 const ManageRoomType: React.FC = () => {
   const [roomTypes, setRoomTypes] = useState<RoomType[]>([]);
   const [modalVisible, setModalVisible] = useState(false);
-  const [editing, setEditing] = useState<RoomType | null>(null);
+  const [editingRoomType, setEditingRoomType] = useState<RoomType | null>(null);
   const [form] = Form.useForm();
-  const [typeName, setTypeName] = useState<string>('Theo giờ');
-  const [numDays, setNumDays] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-    setRoomTypes(data);
-  }, []);
-
-  const openModal = (roomType?: RoomType) => {
-    setEditing(roomType || null);
-    setModalVisible(true);
-    if (roomType) {
-      setTypeName(roomType.TypeName);
-      if (roomType.TypeName === 'Theo ngày') {
-        setNumDays(roomType.HourThreshold / 24);
+  const fetchRoomTypes = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/admin/roomtypes`);
+      if (!response.ok) {
+        let errorData = null;
+        try {
+          errorData = await response.json();
+        } catch { }
+        throw new Error(errorData?.message || `HTTP error! status: ${response.status}`);
       }
-      form.setFieldsValue(roomType);
-    } else {
-      setTypeName('Theo giờ');
-      setNumDays(1);
-      form.resetFields();
+      const data: RoomType[] = await response.json();
+      if (!Array.isArray(data)) {
+        message.warning('Dữ liệu loại phòng nhận được không đúng định dạng. Vui lòng kiểm tra API.');
+        setRoomTypes([]);
+        return;
+      }
+      setRoomTypes(data);
+    } catch (err: any) {
+      message.error(`Tải danh sách loại phòng thất bại: ${err.message}`);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const handleOk = () => {
-    form.validateFields().then(values => {
-      let updated: RoomType[];
-      if (editing) {
-        updated = roomTypes.map(rt =>
-          rt.RoomTypeID === editing.RoomTypeID ? { ...editing, ...values } : rt
-        );
-        message.success('Cập nhật loại phòng thành công!');
+  useEffect(() => {
+    fetchRoomTypes();
+  }, []);
+
+  const formatHourThresholdForDisplay = (hours: number): string => {
+    if (hours === 0) return '0 giờ';
+    const days = Math.floor(hours / 24);
+    const remainingHours = hours % 24;
+
+    if (days > 0 && remainingHours > 0) {
+      return `${days} ngày ${remainingHours} giờ`;
+    } else if (days > 0) {
+      return `${days} ngày`;
+    } else {
+      return `${remainingHours} giờ`;
+    }
+  };
+
+  const openModal = (roomType?: RoomType) => {
+    setEditingRoomType(roomType || null);
+    setModalVisible(true);
+    if (roomType) {
+      form.setFieldsValue(roomType);
+    } else {
+      form.resetFields(); // Đảm bảo reset sạch sẽ
+      form.setFieldsValue({
+        typeName: '', // Đảm bảo khởi tạo với chuỗi rỗng
+        hourThreshold: 1,
+        basePrice: 0,
+        overchargePerHour: 0,
+      });
+    }
+  };
+
+  const handleOk = async () => {
+    try {
+      const values = await form.validateFields();
+      const roomTypeToSave: RoomType = { ...editingRoomType, ...values };
+
+      let response: Response;
+
+      if (editingRoomType && editingRoomType.roomTypeID) {
+        response = await fetch(`${API_BASE_URL}/admin/roomtypes/${roomTypeToSave.roomTypeID}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(roomTypeToSave),
+        });
       } else {
-        const newType: RoomType = {
-          ...values,
-          RoomTypeID: Date.now(),
-        };
-        updated = [newType, ...roomTypes];
-        message.success('Thêm loại phòng thành công!');
+        const newRoomType = { ...roomTypeToSave };
+        delete (newRoomType as Partial<RoomType>).roomTypeID;
+
+        response = await fetch(`${API_BASE_URL}/admin/roomtypes`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(newRoomType),
+        });
       }
-      setRoomTypes(updated);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+
+      if (!response.ok) {
+        let errorData = null;
+        try {
+          errorData = await response.json();
+          console.error("Lỗi API response:", errorData);
+        } catch {
+          console.error("Lỗi: Không thể parse JSON từ phản hồi lỗi.");
+        }
+        throw new Error(errorData?.message || 'Lỗi khi lưu loại phòng');
+      }
+
+      message.success(editingRoomType ? 'Cập nhật loại phòng thành công!' : 'Thêm loại phòng thành công!');
       setModalVisible(false);
-      setEditing(null);
+      setEditingRoomType(null);
+      form.resetFields();
+      fetchRoomTypes();
+    } catch (error: any) {
+      console.error("Lỗi khi lưu loại phòng (Frontend catch):", error);
+      message.error(`Lưu loại phòng thất bại: ${error.message}`);
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    Modal.confirm({
+      title: 'Xác nhận xóa loại phòng?',
+      content: 'Bạn có chắc chắn muốn xóa loại phòng này? Thao tác này không thể hoàn tác.',
+      okText: 'Xóa',
+      okType: 'danger',
+      cancelText: 'Hủy',
+      onOk: async () => {
+        try {
+          const response = await fetch(`${API_BASE_URL}/admin/roomtypes/${id}`, {
+            method: 'DELETE',
+          });
+
+          if (!response.ok) {
+            let errorData = null;
+            try {
+              errorData = await response.json();
+            } catch { }
+            throw new Error(errorData?.message || 'Lỗi khi xóa loại phòng');
+          }
+
+          message.success('Đã xóa loại phòng thành công!');
+          fetchRoomTypes();
+        } catch (error: any) {
+          message.error(`Xóa loại phòng thất bại: ${error.message}`);
+        }
+      }
     });
   };
 
-  const handleTypeChange = (value: string) => {
-    setTypeName(value);
-    if (value === 'Theo ngày') {
-      setNumDays(1);
-      form.setFieldsValue({ HourThreshold: 24 });
-    } else if (value === 'Qua đêm') {
-      form.setFieldsValue({ HourThreshold: 12 });
-    } else {
-      form.setFieldsValue({ HourThreshold: undefined });
-    }
-  };
-
-  const handleNumDaysChange = (value: number | null) => {
-    if (value !== null) {
-      setNumDays(value);
-      form.setFieldsValue({ HourThreshold: value * 24 });
-    }
-  };
-
   const columns = [
-    { title: 'Tên loại phòng', dataIndex: 'TypeName', key: 'TypeName' },
-    { title: 'Giờ chuẩn', dataIndex: 'HourThreshold', key: 'HourThreshold' },
-    { title: 'Phụ phí/giờ', dataIndex: 'OverchargePerHour', key: 'OverchargePerHour', render: (value: number) => value.toLocaleString() + '₫', },
+    { title: 'ID', dataIndex: 'roomTypeID', key: 'roomTypeID' },
+    { title: 'Tên loại phòng', dataIndex: 'typeName', key: 'typeName' },
+    {
+      title: 'Giờ chuẩn',
+      dataIndex: 'hourThreshold',
+      key: 'hourThreshold',
+      render: (value: number) => formatHourThresholdForDisplay(value),
+    },
+    {
+      title: 'Giá cơ bản',
+      dataIndex: 'basePrice',
+      key: 'basePrice',
+      render: (value: number) => value.toLocaleString() + '₫',
+    },
+    {
+      title: 'Phụ phí/giờ',
+      dataIndex: 'overchargePerHour',
+      key: 'overchargePerHour',
+      render: (value: number) => value.toLocaleString() + '₫',
+    },
     {
       title: 'Hành động',
       key: 'action',
       render: (_: any, record: RoomType) => (
         <Space>
           <Button type="link" onClick={() => openModal(record)}>Sửa</Button>
-          <Button type="link" danger onClick={() => handleDelete(record.RoomTypeID)}>Xóa</Button>
+          <Button type="link" danger onClick={() => handleDelete(record.roomTypeID)}>Xóa</Button>
         </Space>
       ),
     },
   ];
-
-  const handleDelete = (id: number) => {
-    Modal.confirm({
-      title: 'Xác nhận xóa loại phòng?',
-      onOk: () => {
-        const updated = roomTypes.filter(rt => rt.RoomTypeID !== id);
-        setRoomTypes(updated);
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-        message.success('Đã xóa loại phòng!');
-      }
-    });
-  };
 
   return (
     <div>
@@ -110,23 +185,25 @@ const ManageRoomType: React.FC = () => {
       <Button type="primary" style={{ marginBottom: 16 }} onClick={() => openModal()}>
         Thêm loại phòng
       </Button>
-      <Table dataSource={roomTypes} columns={columns} rowKey="RoomTypeID" />
+      <Table
+        dataSource={roomTypes}
+        columns={columns}
+        rowKey="roomTypeID"
+        loading={loading}
+      />
 
       <Modal
-        title={editing ? 'Sửa loại phòng' : 'Thêm loại phòng'}
+        title={editingRoomType ? 'Sửa loại phòng' : 'Thêm loại phòng'}
         visible={modalVisible}
         onOk={handleOk}
-        onCancel={() => setModalVisible(false)}
+        onCancel={() => {
+          setModalVisible(false);
+          form.resetFields();
+        }}
         okText="Lưu"
         cancelText="Hủy"
       >
-        <RoomTypeForm
-          form={form}
-          typeName={typeName}
-          numDays={numDays}
-          onTypeChange={handleTypeChange}
-          onNumDaysChange={handleNumDaysChange}
-        />
+        <RoomTypeForm form={form} />
       </Modal>
     </div>
   );

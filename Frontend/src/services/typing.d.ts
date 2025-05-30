@@ -1,65 +1,67 @@
 export interface Room {
-  roomid: number;
-  roomname: string;
-  baseroomtype: 'Phòng đơn' | 'Phòng đôi';
+  roomID: number;
+  roomName: string;
+  baseRoomType: 'Single'| 'Double'; // Keep as is, or expand if more base types exist
   price: number;
-  status: 'Đang trống' | 'Đã cho thuê' | 'Đang dọn dẹp';
+  // Make sure this list includes ALL possible statuses your rooms can have.
+  status: 'Available' | 'In Use'| 'Being Cleaned' | 'Checked Out';
   description?: string;
-  RoomServices?: RoomService[];
-  RoomTypeID: number;  
-  RoomType?: RoomType; 
+  roomTypeID: number | null;
+  roomType?: RoomType | null;
 }
 
 export interface RoomType {
-  RoomTypeID: number;
-  TypeName: 'Theo giờ' | 'Theo ngày' | 'Qua đêm';
-  HourThreshold: number;
-  OverchargePerHour: number;
-  Rooms?: Room[];
+  roomTypeID: number;
+  typeName: string;
+  hourThreshold: number;
+  overchargePerHour: number;
+  basePrice: number;
+ // rooms?: Room[];
 }
 
 export type RoomService = {
-  RoomServiceID: number;
-  RoomID: number;
-  Room: Room;
-  ServiceID: number;
-  Service: Service;
-  Quanity: number;
-  StartTime: string;
-  EndTime?: string;
-  History?: History;
+  roomServiceID: number;
+  roomID: number;
+  room: Room;
+  serviceID: number;
+  service: Service;
+  quantity: number;
+  history?: History;
+  
 };
 
 export type ServiceType = 'Food' | 'Drink';
 
 export interface Service {
-  ServiceID: number;
-  ServiceName: string;
-  Price: number;
-  ServiceType: ServiceType;
+  serviceID: number;
+  serviceName: string;
+  price: number;
+  serviceType: ServiceType;
 }
 
 export interface History {
-  PhoneCustomer: string;
-  FullNameCustomer: string;
-  IDCustomer: string;
-  historyid: number;
-  roomid: number;
+  numberPhoneCustomer: string;
+  nameCustomer: string;
+  idCustomer: string;
+  historyID: number;
+  roomID: number;
   room: Room;
-  userid: number;
+  userID: number;
   user?: User;
-  roomservices: RoomService[];
-  totalprice: number;
-  starttime: string | null;
-  endtime?: string | null;
-  isCheckedOut?: boolean;
+  roomServices: RoomService[];
+  totalPrice: number;
+  startTime: string | null;
+  endTime?: string | null;
+  isCheckOut?: boolean;
 }
 
 export interface User{
-  UserID: number;
-  Username: string;
-  Password: string;
-  FullName: string;
-  Email: string;
-  Role: string;
+  userID: number;
+  username: string;
+  password: string;
+  fullName: string;
+  email: string;
+  role: string;
 }
+
+

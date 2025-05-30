@@ -11,6 +11,8 @@ namespace RIPT1307_BTL.Controllers
         public DbSet<Service> Services { get; set; } // Mặc dù bảng tên 'user', tên DbSet vẫn có thể là Users
         public DbSet<Room> Rooms { get; set; } // Mặc dù bảng tên 'user', tên DbSet vẫn có thể là Users
         public DbSet<RoomService> RoomServices { get; set; } // Mặc dù bảng tên 'user', tên DbSet vẫn có thể là Users
+        public DbSet<RoomType> RoomTypes { get; set; } // Mặc dù bảng tên 'user', tên DbSet vẫn có thể là Users        
+        public DbSet<History> Histories { get; set; } // Mặc dù bảng tên 'user', tên DbSet vẫn có thể là Users
 
     }
 }

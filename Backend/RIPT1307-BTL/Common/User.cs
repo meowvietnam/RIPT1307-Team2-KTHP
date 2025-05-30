@@ -12,3 +12,10 @@ public class User
     public string Email { get; set; }
     public string Role { get; set; }
 }
+public class UserDto 
+{
+    public int UserID { get; set; }
+    public string FullName { get; set; }
+
+}
+

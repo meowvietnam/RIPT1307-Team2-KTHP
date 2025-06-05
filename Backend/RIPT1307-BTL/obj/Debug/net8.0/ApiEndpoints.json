@@ -95,6 +95,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "Login",
+    "RelativePath": "admin/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
     "Method": "CreateRoom",
     "RelativePath": "admin/rooms",
@@ -567,6 +583,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "Login",
+    "RelativePath": "staff/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "LoginRequest",
         "IsRequired": true
       }
     ],

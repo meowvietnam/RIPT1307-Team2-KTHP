@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using RIPT1307_BTL.Common;
 using Microsoft.Extensions.Logging; // Thêm namespace này
+using RIPT1307_BTL.Common;
 
 namespace RIPT1307_BTL.Controllers
 {
@@ -13,12 +13,30 @@ namespace RIPT1307_BTL.Controllers
         protected readonly AppDbContext _context;
         protected readonly ILogger<StaffController> _logger; // Khai báo ILogger
 
+
         // CHỈNH SỬA: Thêm ILogger vào constructor
         public StaffController(AppDbContext context, ILogger<StaffController> logger)
         {
             _context = context;
             _logger = logger; // Khởi tạo ILogger
         }
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginRequest request)
+        {
+            if (string.IsNullOrWhiteSpace(request.Username) || string.IsNullOrWhiteSpace(request.Password))
+                return BadRequest(new { success = false, message = "Username or password is empty." });
+
+            var user = _context.Users.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
+            if (user == null)
+                return Unauthorized(new { success = false, message = "Invalid username or password." });
+
+            return Ok(new
+            {
+                success = true,
+                role = user.Role
+            });
+        }
+
 
         // ---------------------- SERVICES ----------------------
         [HttpGet("services")]

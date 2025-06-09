@@ -16,6 +16,54 @@ namespace RIPT1307_BTL.Controllers
             // Thân hàm của constructor AdminController
             // Bạn có thể để trống nếu không có logic khởi tạo đặc biệt nào cho AdminController
         }
+        [HttpPut("requests/{id}")]
+        public IActionResult UpdateRequestStatus(int id, [FromBody] UpdateRequestStatusDto dto)
+        {
+            try
+            {
+                // Tìm Request theo RequestID, bao gồm User
+                var request = _context.Requests
+                    .Include(r => r.User)
+                    .FirstOrDefault(r => r.RequestID == id);
+
+                if (request == null)
+                {
+                    return NotFound("Request not found.");
+                }
+
+                // Cập nhật chỉ Status
+                request.Status = dto.Status;
+                _context.SaveChanges();
+
+                // Tạo response tương tự GetRequests
+                var response = new Request
+                {
+                    RequestID = request.RequestID,
+                    Title = request.Title,
+                    Content = request.Content,
+                    Status = request.Status,
+                    User = new User
+                    {
+                        UserID = request.User.UserID,
+                        Username = request.User.Username,
+                        FullName = request.User.FullName,
+                        Email = request.User.Email,
+                        Role = request.User.Role
+                    }
+                };
+
+                return Ok(response);
+            }
+            catch (DbUpdateException ex)
+            {
+                return StatusCode(500, $"Database error: {ex.InnerException?.Message ?? ex.Message}");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"An error occurred: {ex.Message}");
+            }
+        }
+
         // ---------------------- USERS ----------------------
         // GetUsers được chuyển sang StaffController và là public
 

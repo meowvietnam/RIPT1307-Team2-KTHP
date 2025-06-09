@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging; // Thêm namespace này
 using RIPT1307_BTL.Common;
+using System.Net;
 
 namespace RIPT1307_BTL.Controllers
 {
@@ -19,6 +20,59 @@ namespace RIPT1307_BTL.Controllers
         {
             _context = context;
             _logger = logger; // Khởi tạo ILogger
+        }
+        // ---------------------- Request ----------------------
+        [HttpGet("requests")]
+        // [Authorize(Roles = "staff,admin")] // Restrict to staff or admin
+        public IActionResult GetRequests()
+        {
+            var requests = _context.Requests
+            .Include(r => r.User) // Include related User data
+            .Select(r => new Request
+            {
+                RequestID = r.RequestID,
+                Title = r.Title,
+                Content = r.Content,
+                Status = r.Status,
+                User = new User
+                {
+                    UserID = r.User.UserID,
+                    Username = r.User.Username,
+                    FullName = r.User.FullName,
+                    Email = r.User.Email,
+                    Role = r.User.Role
+                }
+            })
+            .ToList();
+            return Ok(requests);
+        }
+
+        [HttpPost("requests")]
+        // [Authorize(Roles = "staff,admin")] // Restrict to staff or admin
+        public IActionResult CreateRequest([FromBody] RequestDTO requestDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (!_context.Users.Any(u => u.UserID == requestDto.UserID))
+            {
+                return BadRequest("Invalid SenderID: User does not exist.");
+            }
+
+            var request = new Request
+            {
+                UserID = requestDto.UserID,
+                Status = "Pending", // Sử dụng enum
+                Title = requestDto.Title,
+                Content = requestDto.Content,
+            };
+
+            _context.Requests.Add(request);
+            _context.SaveChanges();
+
+            return CreatedAtAction(nameof(GetRequests), new { id = request.RequestID }, request);
         }
         [HttpPost("login")]
         public IActionResult Login([FromBody] LoginRequest request)

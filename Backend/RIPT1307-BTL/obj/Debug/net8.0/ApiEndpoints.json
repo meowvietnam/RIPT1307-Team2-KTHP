@@ -111,6 +111,53 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "GetRequests",
+    "RelativePath": "admin/requests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "CreateRequest",
+    "RelativePath": "admin/requests",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "RIPT1307_BTL.Common.RequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
+    "Method": "UpdateRequestStatus",
+    "RelativePath": "admin/requests/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "dto",
+        "Type": "RIPT1307_BTL.Common.UpdateRequestStatusDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
     "Method": "CreateRoom",
     "RelativePath": "admin/rooms",
@@ -599,6 +646,32 @@
       {
         "Name": "request",
         "Type": "LoginRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "GetRequests",
+    "RelativePath": "staff/requests",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
+    "Method": "CreateRequest",
+    "RelativePath": "staff/requests",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestDto",
+        "Type": "RIPT1307_BTL.Common.RequestDTO",
         "IsRequired": true
       }
     ],

@@ -3,12 +3,14 @@ import { Table, Button, Modal, Popconfirm, message } from 'antd';
 import UserForm from '@/pages/ManageUsers/components/UserForm'; 
 import type { User } from '@/services/typing'; 
 import { API_BASE_URL } from '@/config/api'; 
+import { EyeInvisibleOutlined, EyeOutlined } from '@ant-design/icons';
 
 export default function UserManagerPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [editingUser, setEditingUser] = useState<User | null>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [visiblePasswords, setVisiblePasswords] = useState<{ [key: number]: boolean }>({});
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -106,6 +108,29 @@ export default function UserManagerPage() {
 
   const columns = [
     { title: 'Tên đăng nhập', dataIndex: 'username', key: 'username' },
+    {
+      title: 'Mật khẩu',
+      dataIndex: 'password',
+      key: 'password',
+      render: (password: string, record: User) => (
+        <>
+          {visiblePasswords[record.userID] ? password : '***'}
+          <Button
+            type="link"
+            size="small"
+            onClick={() =>
+              setVisiblePasswords(prev => ({
+                ...prev,
+                [record.userID]: !prev[record.userID],
+              }))
+            }
+            style={{ paddingLeft: 8 }}
+          >
+            {visiblePasswords[record.userID] ? <EyeInvisibleOutlined /> : <EyeOutlined />}
+          </Button>
+        </>
+      ),
+    },
     { title: 'Họ tên', dataIndex: 'fullName', key: 'fullName' },
     { title: 'Email', dataIndex: 'email', key: 'email' },
     { title: 'Vai trò', dataIndex: 'role', key: 'role' },

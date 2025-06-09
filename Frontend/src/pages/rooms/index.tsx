@@ -194,6 +194,7 @@ const RoomManagement: React.FC = () => {
 
   return (
     <div>
+      <h2>Danh sách phòng khách sạn</h2>
       <Button type="primary" icon={<PlusOutlined />} onClick={handleAdd} style={{ marginBottom: 16 }}>
         Thêm phòng
       </Button>

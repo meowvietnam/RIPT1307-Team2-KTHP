@@ -32,6 +32,8 @@ export async function getInitialState(): Promise<IInitialState> {
 	};
 }
 
+
+
 // Tobe removed
 const authHeaderInterceptor = (url: string, options: RequestOptionsInit) => ({});
 
@@ -81,6 +83,16 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
 
 
 		onPageChange: () => {
+			const token = localStorage.getItem('token');
+			const { location } = history;
+			// Nếu chưa có token và không phải trang login thì chuyển hướng về login
+			if (!token && location.pathname !== '/user/login') {
+				history.replace('/user/login');
+			}
+			// Nếu đã đăng nhập mà vào trang / thì chuyển hướng về dashboard hoặc trang chính
+			if (token && location.pathname === '/') {
+				history.replace('/thong-ke');
+			}
 			if (initialState?.currentUser) {
 				const { location } = history;
 				const isUncheckPath = unCheckPermissionPaths.some((path) => window.location.pathname.includes(path));

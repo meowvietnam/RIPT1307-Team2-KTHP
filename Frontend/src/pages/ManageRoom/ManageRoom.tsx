@@ -43,7 +43,6 @@ const RoomStaffView: React.FC = () => {
       const servicesData: Service[] = await servicesResponse.json();
       setServices(servicesData); // CẬP NHẬT STATE SERVICES
 
-      message.success('Đã tải dữ liệu phòng, loại phòng và dịch vụ thành công!');
     } catch (error) {
       console.error("Lỗi khi tải dữ liệu:", error);
       message.error(`Lỗi khi tải dữ liệu: ${error instanceof Error ? error.message : String(error)}`);
@@ -120,7 +119,6 @@ const RoomStaffView: React.FC = () => {
 
       const updatedRoom: Room = await response.json();
       setRooms(prevRooms => prevRooms.map(r => r.roomID === roomid ? updatedRoom : r));
-      message.success(`Cập nhật trạng thái phòng "${updatedRoom.roomName}" thành "${newStatus}" thành công!`);
     } catch (error) {
       console.error("Lỗi cập nhật trạng thái phòng:", error);
       message.error(`Lỗi cập nhật trạng thái phòng: ${error instanceof Error ? error.message : String(error)}`);

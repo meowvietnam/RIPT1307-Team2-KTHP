@@ -10,6 +10,7 @@ import {
 import queryString from 'query-string';
 import type { ESettingKey } from './constant';
 import type { ISetting } from './typing';
+import { API_BASE_URL } from '@/config/api';
 
 // export async function getInfo() {
 //   return axios.get(`${ip3}/user/me`);
@@ -20,7 +21,8 @@ export async function getUserInfo() {
 }
 
 export async function adminlogin(payload: { username?: string; password?: string }) {
-	return axios.post(`${ip3}/auth/login`, { ...payload, platform: 'Web' });
+	
+  return axios.post(`${API_BASE_URL}/staff/login`, payload);
 }
 
 export async function refreshAccesssToken(payload: { refreshToken: string }) {

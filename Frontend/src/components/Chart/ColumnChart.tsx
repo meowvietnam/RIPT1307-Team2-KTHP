@@ -29,6 +29,7 @@ const ColumnChart = (props: DataChartType) => {
 					},
 				},
 			},
+			toolbar: { show: false },
 		},
 		title: {
 			text: title ?? yLabel[0],

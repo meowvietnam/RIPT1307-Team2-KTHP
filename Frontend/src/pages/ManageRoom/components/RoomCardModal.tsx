@@ -331,12 +331,11 @@ const handleRoomTypeSelectChange = (value: number) => {
       width={1200}
       footer={null}
       centered
-      bodyStyle={{ paddingBottom: '0' }}
     >
       <Spin spinning={loadingModal} tip="Đang tải dữ liệu...">
         <div style={{ display: 'flex', gap: 16 }}>
           {/* Cột trái: Danh sách lịch sử */}
-          <div style={{ width: '35%' }}>
+          <div style={{ width: '35%', }}>
             <Card
               title="Danh sách lịch sử"
               size="small"
@@ -357,7 +356,7 @@ const handleRoomTypeSelectChange = (value: number) => {
                     <Card
                       key={history.historyID}
                       size="small"
-                      style={{ marginBottom: 8, cursor: 'pointer', borderColor: selectedHistory?.historyID === history.historyID ? '#1890ff' : undefined }}
+                      style={{ marginRight: 8, marginBottom: 8, cursor: 'pointer', borderColor: selectedHistory?.historyID === history.historyID ? '#1890ff' : undefined }}
                       onClick={() => setSelectedHistory(history)}
                     >
                       <p><strong>Mã:</strong> {history.historyID || 'N/A'}</p>
@@ -415,9 +414,7 @@ const handleRoomTypeSelectChange = (value: number) => {
                     {calculateDisplayTotalPrice(selectedHistory, room, services)?.toLocaleString() || '0'}₫
                   </Descriptions.Item>
                   <Descriptions.Item label="Trạng thái phòng">
-                    <Tag color={getStatusColor(selectedHistory.room.status)}>
-                      {getHistoryStatus(selectedHistory)}
-                    </Tag>
+                    {getHistoryStatus(selectedHistory)}
                   </Descriptions.Item>
                   <Descriptions.Item label="Dịch vụ đã dùng" span={2}>
                     {selectedHistory.roomServices && selectedHistory.roomServices.length > 0 ? (
@@ -440,7 +437,7 @@ const handleRoomTypeSelectChange = (value: number) => {
                 </Descriptions>
 
                 {/* Form thêm dịch vụ */}
-                <Card title="Thêm dịch vụ" size="small" style={{ marginBottom: 0 }}>
+                <Card title="Thêm dịch vụ" size="small" style={{ height: 'auto' }}>
                   <Form
                     form={form}
                     onFinish={handleAddService}
@@ -508,7 +505,6 @@ const handleRoomTypeSelectChange = (value: number) => {
         onCheckInSuccess={(newHistory) => {
           setHistories(prev => [newHistory, ...prev].sort((a, b) => new Date(b.startTime!).getTime() - new Date(a.startTime!).getTime()));
           setSelectedHistory(newHistory);
-          message.success("Check-in thành công!");
           onStatusChange(room.roomID, 'In Use');
         }}
         onStatusChange={onStatusChange}

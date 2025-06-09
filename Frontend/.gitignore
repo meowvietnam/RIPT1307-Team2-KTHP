@@ -45,3 +45,6 @@ build
 # Sentry Auth Token
 #.sentryclirc
 
+bin/
+obj/
+.vs/

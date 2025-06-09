@@ -1,4 +1,5 @@
-﻿import path from "path";
+﻿import { access } from "fs";
+import path from "path";
 
 export default [
 	{
@@ -33,15 +34,24 @@ export default [
 	// 	component: './TienIch/GioiThieu',
 	// },
 	{
+		path: '/thong-ke',
+		name: 'Thống kê',
+		component: './Statistics/index',
+		icon: 'BarChartOutlined',
+	},
+	
+	{
 		name: 'Quản lý khách sạn',
 		path: '/quan-ly-khach-san',
 		icon: 'HomeOutlined',
+		access: 'canAdmin',
 		routes: [
 			{
 				path: '/quan-ly-khach-san/danh-sach-phong',
 				name: 'Danh sách phòng khách sạn',
 				component: './rooms/index',
 				icon: 'AppstoreOutlined',
+				access: 'canAdmin',
 			},
 			{
 				path: '/quan-ly-khach-san/quan-ly-phong',
@@ -54,8 +64,17 @@ export default [
 				name: 'Quản lý kiểu phòng',
 				component: './ManageRoomType/index',
 				icon: 'ApartmentOutlined',
+				access: 'canAdmin',
 			}
 		],
+	},
+
+	{
+		path: '/quan-ly-phong',
+		name: 'Quản lý phòng khách sạn',
+		component: './ManageRoom/ManageRoom',
+		icon: 'SettingOutlined',
+		access: 'canStaff'
 	},
 
 	{
@@ -63,6 +82,7 @@ export default [
 		name: 'Quản lý nhân viên',
 		component: './ManageUsers/index',
 		icon: 'UserOutlined',
+		access: 'canAdmin',
 	},
 
 	{
@@ -70,7 +90,10 @@ export default [
 		name: 'Danh sách dịch vụ',
 		component: './Service/index',
 		icon: 'GiftOutlined',
+		access: 'canAdmin',
 	},
+
+	
 	
 	// DANH MUC HE THONG
 	// {

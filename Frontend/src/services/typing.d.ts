@@ -70,4 +70,5 @@ interface Request {
   title: string;
   content: string;
   status: 'Pending' | 'Accept' | 'Reject';
+  user?: User;
 }

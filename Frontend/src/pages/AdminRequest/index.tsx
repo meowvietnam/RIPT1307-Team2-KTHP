@@ -31,20 +31,33 @@ const AdminRequestList: React.FC = () => {
 
     const handleStatusChange = async (requestID: number, newStatus: Request['status']) => {
         try {
-        const res = await fetch(`${API_BASE_URL}/admin/requests/${requestID}`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ status: newStatus }),
-        });
-        if (!res.ok) throw new Error('Cập nhật trạng thái thất bại');
-        message.success('Cập nhật trạng thái thành công');
-        setRequests(prev =>
-            prev.map(r =>
-            r.requestID === requestID ? { ...r, status: newStatus } : r
-            )
-        );
+            const res = await fetch(`${API_BASE_URL}/admin/requests/${requestID}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: newStatus }),
+            });
+            if (!res.ok) throw new Error('Cập nhật trạng thái thất bại');
+            message.success('Cập nhật trạng thái thành công');
+            // Lấy thông tin request vừa cập nhật để lấy email
+            const updatedRequest = requests.find(r => r.requestID === requestID);
+            if (updatedRequest && updatedRequest.user?.email) {
+                await fetch(`${API_BASE_URL}/admin/mail`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        email: updatedRequest.user.email,
+                        title: 'Cập nhật trạng thái yêu cầu',
+                        content: `Yêu cầu của bạn đã được cập nhật trạng thái: ${newStatus}`,
+                    }),
+                });
+            }
+            setRequests(prev =>
+                prev.map(r =>
+                    r.requestID === requestID ? { ...r, status: newStatus } : r
+                )
+            );
         } catch {
-        message.error('Cập nhật trạng thái thất bại');
+            message.error('Cập nhật trạng thái thất bại');
         }
     };
 

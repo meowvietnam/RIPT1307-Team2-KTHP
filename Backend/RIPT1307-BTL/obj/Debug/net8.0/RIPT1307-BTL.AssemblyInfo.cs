@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RIPT1307-BTL")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cdbbdb2a7efe3750f09686bc3dec205b6134d71c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+00968b1434b3b4b3fb55d80ab246f14315ea0146")]
 [assembly: System.Reflection.AssemblyProductAttribute("RIPT1307-BTL")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RIPT1307-BTL")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -31,6 +31,7 @@ namespace RIPT1307_BTL.Controllers
             .Select(r => new Request
             {
                 RequestID = r.RequestID,
+                UserID = r.UserID,
                 Title = r.Title,
                 Content = r.Content,
                 Status = r.Status,

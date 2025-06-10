@@ -111,6 +111,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
+    "Method": "SendEmail",
+    "RelativePath": "admin/mail",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "RIPT1307_BTL.Common.EmailRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "RIPT1307_BTL.Controllers.StaffController",
     "Method": "GetRequests",
     "RelativePath": "admin/requests",
@@ -131,6 +147,22 @@
       {
         "Name": "requestDto",
         "Type": "RIPT1307_BTL.Common.RequestDTO",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "RIPT1307_BTL.Controllers.AdminController",
+    "Method": "DeleteRequest",
+    "RelativePath": "admin/requests/{id}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],

@@ -2,7 +2,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using MailKit.Net.Smtp;
+using MimeKit;
 using RIPT1307_BTL.Common;
+
 
 namespace RIPT1307_BTL.Controllers
 {
@@ -15,6 +18,57 @@ namespace RIPT1307_BTL.Controllers
         {
             // Thân hàm của constructor AdminController
             // Bạn có thể để trống nếu không có logic khởi tạo đặc biệt nào cho AdminController
+        }
+        [HttpPost("mail")]
+        public async Task<IActionResult> SendEmail([FromBody] EmailRequest request)
+        {
+            try
+            {
+                // Tạo email message
+                var email = new MimeMessage();
+                email.From.Add(new MailboxAddress("Admin", "dinhhoanglong2005@gmail.com"));
+                email.To.Add(new MailboxAddress("", request.Email));
+                email.Subject = request.Title;
+
+                var bodyBuilder = new BodyBuilder
+                {
+                    HtmlBody = request.Content
+                };
+                email.Body = bodyBuilder.ToMessageBody();
+
+                // Cấu hình SMTP client
+                using var smtp = new SmtpClient();
+                await smtp.ConnectAsync("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
+
+                // Thay bằng email và App Password của bạn
+                await smtp.AuthenticateAsync("dinhhoanglong2005@gmail.com", "ilojgehkbjmaetgj");
+
+                await smtp.SendAsync(email);
+                await smtp.DisconnectAsync(true);
+
+                return Ok(new { message = "Email sent successfully" });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { message = "Error sending email: " + ex.Message });
+            }
+        }
+        [HttpDelete("requests/{id}")]
+        public IActionResult DeleteRequest(int id)
+        {
+            // Tìm Request theo RequestID
+            var request = _context.Requests.FirstOrDefault(r => r.RequestID == id);
+
+            if (request == null)
+            {
+                return NotFound("Request not found.");
+            }
+
+            // Xóa Request
+            _context.Requests.Remove(request);
+            _context.SaveChanges();
+
+            return NoContent(); // HTTP 204: Xóa thành công
         }
         [HttpPut("requests/{id}")]
         public IActionResult UpdateRequestStatus(int id, [FromBody] UpdateRequestStatusDto dto)

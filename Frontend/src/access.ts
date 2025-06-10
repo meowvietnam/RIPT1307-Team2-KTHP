@@ -9,7 +9,7 @@ export default function access(initialState: IInitialState) {
 	// const scopes = initialState.authorizedPermissions?.map((item) => item.scopes).flat();
 	const role = localStorage.getItem('role');
 	return {
-		canAdmin: role === 'admin',
+		canAdmin: role === 'Admin',
     	canStaff: role === 'Staff',
 		// canBoQLKH: token && vaiTro && vaiTro === 'can_bo_qlkh',
 		// lanhDao: token && vaiTro && vaiTro === 'lanh_dao',

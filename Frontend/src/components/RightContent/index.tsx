@@ -17,7 +17,11 @@ const GlobalHeaderRight: React.FC = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('role');
+        localStorage.removeItem('username');
+        localStorage.removeItem('user');
+        localStorage.removeItem('staffID');
         history.push('/user/login');
+        
     };
 
 	const username = localStorage.getItem('username') || 'Người dùng';

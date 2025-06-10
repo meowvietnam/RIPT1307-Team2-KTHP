@@ -123,6 +123,7 @@ namespace RIPT1307_BTL.Controllers
                                         {
                                             UserID = u.UserID,
                                             FullName = u.FullName,
+                                            UserName = u.Username,
                                             //Role = u.Role // <-- BỎ COMMENT DÒNG NÀY ĐỂ BAO GỒM ROLE TRONG DTO
                                         })
                                         .ToListAsync();

@@ -93,7 +93,21 @@ export default [
 		access: 'canAdmin',
 	},
 
-	
+	{
+		path: '/gui-phan-hoi',
+		name: 'Phản hồi',
+		component: './StaffRequest/index',
+		icon: 'MailOutlined',
+		access: 'canStaff',
+	},
+
+	{
+		path: '/quan-ly-request-nhan-vien',
+		name: 'Quản lý request nhân viên',
+		component: './AdminRequest/index',
+		icon: 'MailOutlined',
+		access: 'canAdmin',
+	},
 	
 	// DANH MUC HE THONG
 	// {

@@ -16,6 +16,23 @@ namespace RIPT1307_BTL.Controllers
             // Thân hàm của constructor AdminController
             // Bạn có thể để trống nếu không có logic khởi tạo đặc biệt nào cho AdminController
         }
+        [HttpDelete("requests/{id}")]
+        public IActionResult DeleteRequest(int id)
+        {
+            // Tìm Request theo RequestID
+            var request = _context.Requests.FirstOrDefault(r => r.RequestID == id);
+
+            if (request == null)
+            {
+                return NotFound("Request not found.");
+            }
+
+            // Xóa Request
+            _context.Requests.Remove(request);
+            _context.SaveChanges();
+
+            return NoContent(); // HTTP 204: Xóa thành công
+        }
         [HttpPut("requests/{id}")]
         public IActionResult UpdateRequestStatus(int id, [FromBody] UpdateRequestStatusDto dto)
         {

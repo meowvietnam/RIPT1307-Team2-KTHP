@@ -17,7 +17,7 @@ import { API_BASE_URL } from '@/config/api';
 // }
 
 export async function getUserInfo() {
-	return axios.get(keycloakUserInfoEndpoint);
+	return axios.get(`${API_BASE_URL}/staff/usersdto`);
 }
 
 export async function adminlogin(payload: { username?: string; password?: string }) {

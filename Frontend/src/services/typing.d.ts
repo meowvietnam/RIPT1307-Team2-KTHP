@@ -64,4 +64,10 @@ export interface User{
   role: string;
 }
 
-
+interface Request {
+  requestID: number;
+  userID: number;
+  title: string;
+  content: string;
+  status: 'Pending' | 'Accept' | 'Reject';
+}

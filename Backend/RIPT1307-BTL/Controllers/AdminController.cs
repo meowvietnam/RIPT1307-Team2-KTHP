@@ -235,17 +235,31 @@ namespace RIPT1307_BTL.Controllers
         }
 
         [HttpDelete("rooms/{id}")]
-      //  [Authorize(Roles = "admin")] // OK: Chỉ Admin mới có thể DeleteRoom
+        //  [Authorize(Roles = "admin")] // OK: Chỉ Admin mới có thể DeleteRoom
         public IActionResult DeleteRoom(int id)
         {
+            // Tìm bản ghi room theo RoomID
             var room = _context.Rooms.FirstOrDefault(r => r.RoomID == id);
-            if (room == null) return NotFound(new { message = "Room not found" });
+            if (room == null)
+            {
+                return NotFound(new { message = "Room not found" });
+            }
 
+            // Xóa tất cả các bản ghi trong room_service có RoomID tương ứng
+            var roomServices = _context.RoomServices.Where(rs => rs.RoomID == id).ToList();
+            if (roomServices.Any())
+            {
+                _context.RoomServices.RemoveRange(roomServices);
+            }
+
+            // Xóa bản ghi trong bảng room
             _context.Rooms.Remove(room);
-            _context.SaveChanges();
-            return Ok(new { message = "Room deleted successfully" });
-        }
 
+            // Lưu thay đổi vào cơ sở dữ liệu
+            _context.SaveChanges();
+
+            return Ok(new { message = "Room and related room services deleted successfully" });
+        }
         // ---------------------- SERVICES ----------------------
         // GetServices và GetServiceById được chuyển sang StaffController và là public
 
